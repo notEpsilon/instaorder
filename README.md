@@ -1,7 +1,9 @@
 # Instaorder
 
-<img width="250" style="margin-bottom: 30px; margin-top: 40px; margin-left: auto; margin-right: auto; display: block;" src="apps/client/src/assets/logo.svg" alt="instaorder_logo" />
+<p align="center">
+<img width="250" src="apps/client/src/assets/logo.svg" alt="instaorder_logo" />
+</p>
 
-<p style="font-size: 1.1rem; text-align: center;">
+<p style="font-size: 1.1rem;" align="center">
 Instaorder is a platform as a service that you can integrate at your business for blazingly fast internal food ordering.
 </p>
