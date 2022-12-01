@@ -5,16 +5,17 @@ import { useInView } from "react-intersection-observer";
 interface Props {
   children: React.ReactNode;
   className?: string;
+  duration?: number;
 }
 
-const variant: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { delay: 0.6 } },
-};
-
-const FadeOnScroll: React.FC<Props> = ({ children, className }) => {
+const FadeOnScroll: React.FC<Props> = ({ children, className, duration }) => {
   const control = useAnimation();
   const [ref, inView] = useInView();
+
+  const variant: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: duration || 0.7 } },
+  };
 
   useEffect(() => {
     if (inView) {
