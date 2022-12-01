@@ -1,5 +1,3 @@
-<!-- # Instaorder -->
-
 <p align="center">
 <img width="600" src="apps/client/src/assets/gh-logo.svg" alt="instaorder_logo" />
 </p>
