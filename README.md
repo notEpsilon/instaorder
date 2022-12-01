@@ -1,7 +1,7 @@
 <!-- # Instaorder -->
 
 <p align="center">
-<img width="400" src="apps/client/src/assets/gh-logo.svg" alt="instaorder_logo" />
+<img width="600" src="apps/client/src/assets/gh-logo.svg" alt="instaorder_logo" />
 </p>
 
 <p style="font-size: 1.2rem;" align="center">
