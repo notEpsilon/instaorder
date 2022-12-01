@@ -4,17 +4,11 @@
 <img width="400" src="apps/client/src/assets/gh-logo.svg" alt="instaorder_logo" />
 </p>
 
-<br />
-
 <p style="font-size: 1.2rem;" align="center">
 Instaorder is a platform as a service that you can integrate into your business for blazingly fast internal food ordering.
 </p>
 
-<br />
-
 ## Running Locally
-
-<hr />
 
 - firstly, you need `node.js` installed, [download node](https://nodejs.org).
 
