@@ -14,6 +14,8 @@ Instaorder is a platform as a service that you can integrate into your business 
 
 - clone this monorepo by running `git clone https://github.com/notEpsilon/instaorder.git`
 
-- `cd` into the cloned folder and run `pnpm --filter=client dev`
+- `cd` into the cloned folder and run `pnpm install` to install dependencies.
+
+- run `pnpm --filter=client dev` to start the client.
 
 - client should start now, navigate to `http://localhost:5173`
