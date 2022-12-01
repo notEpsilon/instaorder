@@ -1,5 +1,9 @@
+import AnimateOnScroll from "../components/AnimateOnScroll";
 import Card from "../components/Card";
+import Colored from "../components/Colored";
 import Container from "../components/Container";
+import Typed from "react-typed";
+import { ReactComponent as LineSVG } from "../assets/line.svg";
 
 interface ICard {
   title: string;
@@ -44,13 +48,65 @@ const HomePage: React.FC = () => {
             </button>
           </div>
         </Container>
+        {/* TODO: Min Height ? */}
         <div className="basis-1/3 bg-[url('/src/assets/wave.svg')] bg-contain bg-repeat-x" />
       </section>
       <section className="relative bg-[#f8f9fa]">
-        <Container className="flex flex-col gap-7 sm:flex-row items-center sm:justify-between py-20">
+        <Container className="flex flex-col gap-y-7 sm:gap-x-7 sm:gap-y-0 sm:flex-row items-center sm:justify-between py-20">
           {cards.map((card, idx) => (
-            <Card key={idx} {...card} />
+            <AnimateOnScroll key={idx}>
+              <Card {...card} />
+            </AnimateOnScroll>
           ))}
+        </Container>
+      </section>
+      <section className="bg-[#f8f9fa] bg-[url('/src/assets/reflection.jpg')] bg-center bg-cover bg-no-repeat">
+        <div className="bg-[url('/src/assets/layered-steps.svg')] bg-center bg-contain bg-transparent bg-repeat-x min-h-[300px]" />
+        <Container className="pb-20">
+          <AnimateOnScroll>
+            <h2 className="text-5xl mb-5 font-extrabold drop-shadow">
+              <Colored from="from-indigo-500" to="to-fuchsia-500">
+                Improve
+              </Colored>{" "}
+              <Typed
+                strings={["Customer", "User", "Employee", "Student"]}
+                typeSpeed={65}
+                backSpeed={50}
+                loop
+              />{" "}
+              Experience
+            </h2>
+          </AnimateOnScroll>
+          <AnimateOnScroll className="mb-5">
+            <div className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 h-2 w-1/3" />
+          </AnimateOnScroll>
+          <AnimateOnScroll>
+            {/*  */}
+            <div className="flex py-10 gap-x-4">
+              <div className="rounded basis-1/2">
+                <LineSVG />
+                {/*  */}
+                <div>
+                  <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Deserunt nemo animi itaque aliquam maxime, ullam vel aperiam
+                    quasi deleniti sint asperiores sequi quidem accusantium,
+                    veniam illo ratione, natus expedita. Sunt!
+                  </p>
+                </div>
+                {/*  */}
+              </div>
+              <div className="left basis-1/2">
+                <p className="font-medium text-gray-600 text-lg">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Error excepturi quibusdam veniam consectetur, sit, fugiat cum
+                  beatae saepe reprehenderit facilis expedita? Nisi error
+                  voluptatum accusantium dolores, saepe recusandae in aperiam!
+                </p>
+              </div>
+            </div>
+            {/*  */}
+          </AnimateOnScroll>
         </Container>
       </section>
     </div>
