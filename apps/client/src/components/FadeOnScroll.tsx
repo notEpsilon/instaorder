@@ -36,3 +36,4 @@ const FadeOnScroll: React.FC<Props> = ({ children, className }) => {
 };
 
 export default FadeOnScroll;
+// closes #3
