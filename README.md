@@ -8,7 +8,7 @@ Instaorder is a platform as a service that you can integrate into your business 
 
 ## Running Locally
 
-- firstly, you need `node.js` installed, [download node](https://nodejs.org).
+- firstly, you need `Node.js` installed, [download node](https://nodejs.org).
 
 - we use `pnpm` as our package manager, install via `npm install -g pnpm` if not already installed.
 
@@ -16,6 +16,6 @@ Instaorder is a platform as a service that you can integrate into your business 
 
 - `cd` into the cloned folder and run `pnpm install` to install dependencies.
 
-- run `pnpm --filter=client dev` to start the client.
+- run `pnpm --filter=client dev` to start the client. (doesn't start the server)
 
 - client should start now, navigate to `http://localhost:5173`
