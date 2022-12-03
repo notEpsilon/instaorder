@@ -1,13 +1,16 @@
 interface Props {
   className?: string;
   children: React.ReactNode;
+  maxW?: string;
 }
 
-const Container: React.FC<Props> = ({ className, children }) => {
+const Container: React.FC<Props> = ({
+  className,
+  children,
+  maxW = "max-w-[min(90%,78.125rem)]",
+}) => {
   return (
-    <div className={`max-w-[min(90%,78.125rem)] mx-auto h-full ${className}`}>
-      {children}
-    </div>
+    <div className={`${maxW} mx-auto h-full ${className}`}>{children}</div>
   );
 };
 
