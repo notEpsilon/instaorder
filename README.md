@@ -3,7 +3,7 @@
 </p>
 
 <p style="font-size: 1.2rem;" align="center">
-Instaorder is a platform as a service that you can integrate into your business for blazingly fast internal food ordering.
+Instaorder is a software as a service that you can integrate into your business for blazingly fast internal food ordering.
 </p>
 
 ## Running Locally
