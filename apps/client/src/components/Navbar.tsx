@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Container from "./Container";
 
 interface NavLink {
@@ -27,7 +28,7 @@ const Navbar: React.FC = () => {
   return (
     <header className="sticky border-b border-[#eceef0] backdrop-blur backdrop-filter bg-opacity-80 h-16 z-50 top-0 inset-x-0 bg-[#f8f9fa]">
       <Container className="flex items-center justify-between relative">
-        <span className="inline-flex items-center space-x-3">
+        <Link to="/" className="inline-flex items-center space-x-3">
           <img
             className="mt-1"
             width="32"
@@ -38,7 +39,7 @@ const Navbar: React.FC = () => {
           <span className="font-extrabold tracking-tight text-3xl">
             instaorder
           </span>
-        </span>
+        </Link>
         <div className="space-x-5 hidden sm:block mr-20">
           {navLinks.map((link, idx) => (
             <a
