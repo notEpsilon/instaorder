@@ -49,11 +49,10 @@ const HomePage: React.FC = () => {
             </button>
           </div>
         </Container>
-        {/* TODO: Min Height ? */}
         <div className="basis-1/3 bg-[url('/src/assets/wave.svg')] bg-contain bg-repeat-x" />
       </section>
       <section className="relative bg-[#f8f9fa]">
-        <Container className="flex flex-col gap-y-7 sm:gap-x-7 sm:gap-y-0 sm:flex-row items-center sm:justify-between py-20">
+        <Container className="flex flex-col gap-y-7 sm:gap-x-7 sm:gap-y-0 sm:flex-row items-center sm:justify-between py-28">
           {cards.map((card, idx) => (
             <AnimateOnScroll key={idx}>
               <Card {...card} />
@@ -82,13 +81,11 @@ const HomePage: React.FC = () => {
             <div className="bg-gradient-to-r from-indigo-500 to-fuchsia-500 h-2 w-1/3" />
           </AnimateOnScroll>
           <div>
-            {/*  */}
             <div className="flex py-10 gap-x-4">
               <div className="basis-1/2">
                 <AnimateOnScroll>
                   <LineSVG />
                 </AnimateOnScroll>
-                {/*  */}
                 <div>
                   <AnimateOnScroll className="flex space-x-4">
                     <div className="mt-2 flex flex-col items-center justify-between -ml-0.5 min-h-[19rem]">
@@ -129,7 +126,6 @@ const HomePage: React.FC = () => {
                     </div>
                   </AnimateOnScroll>
                 </div>
-                {/* second */}
                 <div>
                   <AnimateOnScroll className="flex space-x-4">
                     <div className="mt-2 flex flex-col items-center justify-between -ml-0.5 min-h-[35rem] relative">
@@ -148,7 +144,6 @@ const HomePage: React.FC = () => {
                         />
                       </svg>
                       <div className="h-full mt-2 w-[0.22rem] rounded bg-gradient-to-b from-blue-500 via-blue-400 to-teal-500" />
-                      {/* ex */}
                       <div className="absolute max-h-full min-h-full top-14 left-3.5">
                         <div className="flex items-center min-w-[20rem]">
                           <BlueSVG className="basis-1/4" />
@@ -166,7 +161,6 @@ const HomePage: React.FC = () => {
                           </p>
                         </div>
                       </div>
-                      {/* /ex */}
                     </div>
                     <div className="basis-full">
                       <Colored
@@ -190,8 +184,6 @@ const HomePage: React.FC = () => {
                     </div>
                   </AnimateOnScroll>
                 </div>
-                {/* end second */}
-                {/* third */}
                 <div>
                   <AnimateOnScroll className="flex space-x-4">
                     <div className="mt-2 flex flex-col items-center justify-between -ml-0.5 min-h-[19rem]">
@@ -238,23 +230,15 @@ const HomePage: React.FC = () => {
                     </div>
                   </AnimateOnScroll>
                 </div>
-                {/* end third */}
-                {/*  */}
               </div>
               <div className="right basis-1/2">
-                <p className="font-medium text-gray-600 text-lg">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Error excepturi quibusdam veniam consectetur, sit, fugiat cum
-                  beatae saepe reprehenderit facilis expedita? Nisi error
-                  voluptatum accusantium dolores, saepe recusandae in aperiam!
-                </p>
+                {/* fill with something ? */}
               </div>
             </div>
             {/*  */}
           </div>
         </Container>
       </section>
-      {/* new section */}
       <section className="bg-[#f8f9fa] bg-[url('/src/assets/reflection.jpg')] bg-center bg-cover bg-no-repeat">
         <div className="bg-[url('/src/assets/green-wave.svg')] bg-center bg-contain bg-transparent bg-repeat-x min-h-[300px]" />
         <Container className="pb-20">
@@ -269,9 +253,44 @@ const HomePage: React.FC = () => {
           <AnimateOnScroll className="mb-5">
             <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 h-2 w-1/3" />
           </AnimateOnScroll>
+          <div className="flex flex-col gap-y-7 sm:gap-x-7 sm:gap-y-0 sm:flex-row items-center sm:justify-between py-20">
+            <AnimateOnScroll>
+              <Card
+                title="1. Integrate"
+                body="Integrate our service at your workplace and start being rapid."
+                grad="green"
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll>
+              <Card
+                title="2. Prepay"
+                body="have a balance in your wallet for your favorite food providers."
+                grad="green"
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll>
+              <Card
+                title="3. Order"
+                body="Instantly order from anywhere without wasting time waiting for your order."
+                grad="green"
+              />
+            </AnimateOnScroll>
+          </div>
         </Container>
       </section>
-      {/* /new section */}
+      <footer className="bg-[#f9fafc] border-t border-t-gray-300">
+        <Container className="flex items-center justify-between py-5">
+          <span className="text-xs font-medium">
+            Copyright &#169; Instaorder | All rights reserved
+          </span>
+          <img
+            width="32"
+            height="32"
+            src="/src/assets/logo.svg"
+            loading="lazy"
+          />
+        </Container>
+      </footer>
     </div>
   );
 };
