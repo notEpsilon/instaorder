@@ -52,9 +52,12 @@ const Navbar: React.FC = () => {
           ))}
         </div>
         <div className="hidden sm:block">
-          <button className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm">
+          <Link
+            to="/register"
+            className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
+          >
             Sign in
-          </button>
+          </Link>
         </div>
         {menuOpened ? (
           <svg
@@ -105,9 +108,12 @@ const Navbar: React.FC = () => {
               {link.title}
             </a>
           ))}
-          <button className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm">
+          <Link
+            to="/register"
+            className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
+          >
             Sign in
-          </button>
+          </Link>
         </div>
       </Container>
     </header>

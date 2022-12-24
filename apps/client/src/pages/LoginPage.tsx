@@ -2,18 +2,11 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Container from "../components/Container";
-import { useMutation } from "@tanstack/react-query";
-import { trpc } from "../trpc/client.trpc";
+// import { useAuthState } from "../stores/authState.store";
 
-const initialValues = { username: "", email: "", password: "" };
+const initialValues = { email: "", password: "" };
 
-const RegisterSchema = yup.object().shape({
-  username: yup
-    .string()
-    .min(3, "Username must be at least 3 characters")
-    .max(50, "Username is too long")
-    .matches(/^[a-zA-Z_]{1}[a-zA-Z0-9_]+$/, "Invalid username format")
-    .required("Username is required"),
+const LoginSchema = yup.object().shape({
   email: yup
     .string()
     .email("Invalid email format")
@@ -26,60 +19,38 @@ const RegisterSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const RegisterPage: React.FC = () => {
-  const createUserMutation = useMutation(
-    ["createUser"],
-    (userData: typeof initialValues) => trpc.auth.createUser.mutate(userData)
-  );
-
+const LoginPage: React.FC = () => {
+  //   const setAuthState = useAuthState((state) => state.setAuthState);
+  const setAuthState = (c: boolean) => {};
   const navigate = useNavigate();
 
-  const handleSubmit = (values: typeof initialValues) => {
-    createUserMutation.mutate(values);
-    navigate("/login");
+  const handleSubmit = async (values: typeof initialValues) => {
+    // await Axios.post("/auth/login", { ...values });
+    setAuthState(true);
+    navigate("/");
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gray-50 py-14 dark:bg-slate-900">
+    <div className="min-h-[calc(100vh-4rem)] bg-gray-50 py-20 dark:bg-slate-900">
       <Container
-        className="flex flex-col justify-center space-y-7 rounded-lg bg-white py-8 px-8 shadow dark:bg-slate-800"
+        className="flex flex-col justify-center space-y-7 rounded-lg bg-white py-10 px-8 shadow dark:bg-slate-800"
         maxW="max-w-[min(90%,29rem)]"
       >
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
-          Create an account
+          Sign in to your account
         </h1>
         <Formik
           initialValues={{ ...initialValues }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            handleSubmit(values);
+            await handleSubmit(values);
             setSubmitting(false);
             resetForm();
           }}
-          validationSchema={RegisterSchema}
+          validationSchema={LoginSchema}
         >
           {({ isSubmitting }) => (
             <Form method="POST" className="flex flex-col space-y-5">
               <div className="space-y-3">
-                <div>
-                  <label
-                    htmlFor="username"
-                    className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Username
-                  </label>
-                  <Field
-                    id="username"
-                    type="text"
-                    name="username"
-                    className="w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 outline-none focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-900 dark:border-slate-800 dark:bg-slate-700 dark:text-white"
-                    placeholder="ex. star_123"
-                  />
-                  <ErrorMessage
-                    className="text-sm text-red-500"
-                    name="username"
-                    component="div"
-                  />
-                </div>
                 <div>
                   <label
                     htmlFor="email"
@@ -126,15 +97,15 @@ const RegisterPage: React.FC = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                Sign up
+                Login
               </button>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
+                Don't have an account yet?{" "}
                 <Link
-                  to="/login"
+                  to="/register"
                   className="font-medium text-blue-600 hover:underline"
                 >
-                  Login Here
+                  Sign up
                 </Link>
               </p>
             </Form>
@@ -145,4 +116,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
