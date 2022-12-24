@@ -2,7 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Container from "../components/Container";
-// import { useAuthState } from "../stores/authState.store";
+import { useAuth } from "../stores/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { trpc } from "../trpc/client.trpc";
 
 const initialValues = { email: "", password: "" };
 
@@ -20,14 +22,17 @@ const LoginSchema = yup.object().shape({
 });
 
 const LoginPage: React.FC = () => {
-  //   const setAuthState = useAuthState((state) => state.setAuthState);
-  const setAuthState = (c: boolean) => {};
+  const setLoggedIn = useAuth((state) => state.setLoggedIn);
   const navigate = useNavigate();
+  const loginMutation = useMutation(
+    ["login"],
+    (userInfo: typeof initialValues) => trpc.auth.logUserIn.mutate(userInfo)
+  );
 
   const handleSubmit = async (values: typeof initialValues) => {
-    // await Axios.post("/auth/login", { ...values });
-    setAuthState(true);
-    navigate("/");
+    loginMutation.mutate(values);
+    setLoggedIn(true);
+    navigate("/home");
   };
 
   return (

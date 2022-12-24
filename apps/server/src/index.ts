@@ -23,8 +23,8 @@ import { autoMigrate } from "./utils/auto-migrate.utils";
    */
   app.use(helmetMiddleware);
   app.use(corsMiddleware);
-  app.use(express.json());
   app.use(sessionMiddleware);
+  app.use(express.json());
   app.use("/trpc", trpcMiddleware);
 
   await mssql.connect(SQLConfig);

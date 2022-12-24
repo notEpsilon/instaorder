@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sql-server
+    env_file:
+      - compose.env
+    ports:
+      - 1433:1433
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
