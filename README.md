@@ -16,6 +16,16 @@ Instaorder is a software as a service that you can integrate into your business 
 
 - `cd` into the cloned folder and run `pnpm install` to install dependencies.
 
-- run `pnpm --filter=client dev` to start the client. (doesn't start the server)
+- run `pnpm --filter=server compile:watch` && `pnpm --filter=server dev:watch` in seperate terminals to start the server.
+
+- run `pnpm --filter=client dev` to run the client.
+
+- note: you need a `MSSQL Server` running on `localhost:1433` and `Redis` running on `localhost:6379` (use docker with `docker-compose.yml`file in the repository).
 
 - client should start now, navigate to `http://localhost:5173`
+
+<object data="https://drive.google.com/drive/u/0/folders/1Y5Tr92OzVqlGSJe9SOMcA0oEHK27lhSx" type="application/pdf" width="700px" height="700px">
+    <embed src="https://drive.google.com/drive/u/0/folders/1Y5Tr92OzVqlGSJe9SOMcA0oEHK27lhSx">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://drive.google.com/drive/u/0/folders/1Y5Tr92OzVqlGSJe9SOMcA0oEHK27lhSx">Download PDF</a>.</p>
+    </embed>
+</object>
