@@ -8,7 +8,7 @@ export const userRouter = t.router({
     .input(z.object({ id: z.string().length(25) }))
     .query(async ({ ctx, input }) => {
       const result =
-        await mssql.query<User>`SELECT * FROM [users] WHERE id=${input.id}`;
+        await mssql.query<User>`SELECT * FROM [base_user] WHERE id=${input.id}`;
 
       const user =
         result.recordset.length === 0 ||
@@ -22,6 +22,6 @@ export const userRouter = t.router({
         return { msg: null, err: null };
       }
 
-      return { msg: { ...user }, err: null };
+      return { msg: { ...user, password: undefined }, err: null };
     }),
 });

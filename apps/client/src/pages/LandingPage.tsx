@@ -5,6 +5,7 @@ import Container from "../components/Container";
 import Typed from "react-typed";
 import { ReactComponent as LineSVG } from "../assets/line.svg";
 import { ReactComponent as BlueSVG } from "../assets/blue.svg";
+import { Link } from "react-router-dom";
 
 interface ICard {
   title: string;
@@ -41,9 +42,12 @@ const LandingPage: React.FC = () => {
             voluptates, ab laborum!
           </p>
           <div className="flex justify-center space-x-6">
-            <button className="inline-flex items-center text-center bg-purple-400 px-4 py-1.5 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm">
+            <Link
+              to="/register"
+              className="inline-flex items-center text-center bg-purple-400 px-4 py-1.5 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
+            >
               Get started
-            </button>
+            </Link>
             <button className="inline-flex items-center text-center bg-black px-4 py-1.5 text-sm font-medium cursor-pointer hover:bg-slate-800 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm">
               Learn more
             </button>
@@ -155,9 +159,12 @@ const LandingPage: React.FC = () => {
                             >
                               Get the point?
                             </Colored>
-                            <button className="rounded outline-none focus:outline-none border-2 border-blue-500 text-sm px-4 py-2 hover:text-white hover:bg-blue-500 transition-colors duration-200">
+                            <Link
+                              to="/register"
+                              className="rounded outline-none focus:outline-none border-2 border-blue-500 text-sm px-4 py-2 hover:text-white hover:bg-blue-500 transition-colors duration-200"
+                            >
                               Sign up now
-                            </button>
+                            </Link>
                           </p>
                         </div>
                       </div>

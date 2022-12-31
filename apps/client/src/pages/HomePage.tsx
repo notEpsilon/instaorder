@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-import { useAuth } from "../stores/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "../stores/useAuth";
 import { trpc } from "../trpc/client.trpc";
-import OwnerView from "./OwnerView";
 import CustomerView from "./CustomerView";
+import OwnerView from "./OwnerView";
 
 const HomePage: React.FC = () => {
   const userId = useAuth((state) => state.userId);

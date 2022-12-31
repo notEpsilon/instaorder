@@ -22,7 +22,7 @@ const LoginSchema = yup.object().shape({
 });
 
 const LoginPage: React.FC = () => {
-  const setLoggedIn = useAuth((state) => state.setLoggedIn);
+  const authState = useAuth();
   const navigate = useNavigate();
   const loginMutation = useMutation(
     ["login"],
@@ -30,9 +30,14 @@ const LoginPage: React.FC = () => {
   );
 
   const handleSubmit = async (values: typeof initialValues) => {
-    loginMutation.mutate(values);
-    setLoggedIn(true);
-    navigate("/home");
+    const { msg, err } = await loginMutation.mutateAsync(values);
+    if (err === null && msg !== null) {
+      authState.setLoggedIn(true);
+      authState.setUserId(msg);
+      navigate("/home");
+    } else {
+      console.log(err);
+    }
   };
 
   return (

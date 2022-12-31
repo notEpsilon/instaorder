@@ -4,6 +4,7 @@ export interface State {
   loggedIn: boolean;
   userId: string | undefined;
   setLoggedIn: (newState: boolean) => void;
+  setUserId: (newId: string | undefined) => void;
 }
 
 export const useAuth = create<State>((set, get) => ({
@@ -20,4 +21,5 @@ export const useAuth = create<State>((set, get) => ({
         ? { loggedIn: false, userId: undefined }
         : { loggedIn: true };
     }),
+  setUserId: (newId: string | undefined) => set((state) => ({ userId: newId })),
 }));

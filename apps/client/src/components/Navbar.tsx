@@ -1,5 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../stores/useAuth";
+import { trpc } from "../trpc/client.trpc";
+import { ClientUser } from "../types/User";
 import Container from "./Container";
 
 interface NavLink {
@@ -22,8 +26,66 @@ const navLinks: NavLink[] = [
   },
 ];
 
+const cLinks: NavLink[] = [
+  {
+    title: "owners",
+    path: "/owners",
+  },
+  {
+    title: "orders",
+    path: "/orders",
+  },
+];
+
+const oLinks: NavLink[] = [
+  {
+    title: "markets",
+    path: "/",
+  },
+  {
+    title: "orders",
+    path: "/orderds",
+  },
+];
+
+type Response = { msg: ClientUser; err: null } | { msg: null; err: null };
+
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  const authState = useAuth();
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
+  const userId = useAuth((state) => state.userId);
+  const findUserQuery = useQuery(["findUser"], () =>
+    trpc.users.findUser.query({ id: userId! })
+  );
+
+  const [{ msg: usr }, setCurrentUser] = useState<Response>({
+    msg: null,
+    err: null,
+  });
+
+  const loggedIn = useAuth((state) => state.loggedIn);
+
+  const currUserQuery = useQuery(
+    ["currUser"],
+    () => trpc.auth.currUser.query(),
+    {
+      onSuccess: async (idContainer) => {
+        if (idContainer) {
+          const user = await trpc.users.findUser.query({
+            id: idContainer.userId,
+          });
+          setCurrentUser(user);
+        }
+      },
+    }
+  );
+
+  const logOut = async () => {
+    await trpc.auth.logout.mutate();
+    authState.setLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     <header className="sticky border-b border-[#eceef0] backdrop-blur backdrop-filter bg-opacity-80 h-16 z-50 top-0 inset-x-0 bg-[#f8f9fa]">
@@ -41,7 +103,12 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
         <div className="space-x-5 hidden sm:block mr-20">
-          {navLinks.map((link, idx) => (
+          {(loggedIn
+            ? findUserQuery.data?.msg?.is_owner
+              ? oLinks
+              : cLinks
+            : navLinks
+          ).map((link, idx) => (
             <a
               key={idx}
               href={link.path}
@@ -51,14 +118,27 @@ const Navbar: React.FC = () => {
             </a>
           ))}
         </div>
-        <div className="hidden sm:block">
-          <Link
-            to="/register"
-            className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
-          >
-            Sign in
-          </Link>
-        </div>
+        {!loggedIn && (
+          <div className="hidden sm:block">
+            <Link
+              to="/login"
+              className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
+            >
+              Sign in
+            </Link>
+          </div>
+        )}
+        {loggedIn && usr && (
+          <div className="space-x-4 hidden sm:flex items-center">
+            <span>{usr.username}</span>
+            <button
+              className="bg-red-400 font-medium text-sm text-center text-white rounded px-4 py-1.5 shadow-sm"
+              onClick={logOut}
+            >
+              Sign out
+            </button>
+          </div>
+        )}
         {menuOpened ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -108,12 +188,24 @@ const Navbar: React.FC = () => {
               {link.title}
             </a>
           ))}
-          <Link
-            to="/register"
-            className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
-          >
-            Sign in
-          </Link>
+          {loggedIn ? (
+            <div className="flex flex-col items-center space-y-2">
+              <span>{usr?.username}</span>
+              <button
+                className="bg-red-400 font-medium text-sm text-center text-white rounded px-4 py-1.5 shadow-sm"
+                onClick={logOut}
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/register"
+              className="inline-flex items-center text-center bg-purple-400 px-2.5 py-1 text-sm font-medium cursor-pointer hover:bg-purple-500 text-white transition ease-out duration-200 rounded outline-none lg:block shadow-sm"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       </Container>
     </header>
